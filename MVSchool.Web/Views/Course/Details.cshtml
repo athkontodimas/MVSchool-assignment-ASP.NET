@@ -1,0 +1,31 @@
+﻿@model MVSchool.Entities.Course
+
+@{
+    ViewBag.Title = "Course Info";
+}
+
+<h2>Course Information</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Title)</th>
+        <th>@Html.DisplayNameFor(model => model.StartDate)</th>
+        <th>@Html.DisplayNameFor(model => model.EndDate)</th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>@Html.DisplayFor(model => model.Title)</td>
+        <td>@Html.DisplayFor(model => model.StartDate)</td>
+        <td>@Html.DisplayFor(model => model.EndDate)</td>
+        <td>@Html.ActionLink("Edit", "Edit", new { id=Model.CourseId }) |
+            @Html.ActionLink("Details", "Details", new { id=Model.CourseId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=Model.CourseId })
+        </td>
+    </tr>
+
+
+</table>

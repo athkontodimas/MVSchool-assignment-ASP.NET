@@ -1,0 +1,44 @@
+﻿@model MVSchool.Entities.Assignment
+
+@{
+    ViewBag.Title = "Assignment Info";
+}
+
+<h2>Assignment Information</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubmissionDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.SubmissionDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Description)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=Model.AssignmentId }) |
+            @Html.ActionLink("Details", "Details", "Assignment", new { id=Model.AssignmentId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=Model.AssignmentId })
+        </td>
+    </tr>
+
+
+</table>

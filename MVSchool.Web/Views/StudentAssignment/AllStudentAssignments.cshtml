@@ -1,0 +1,83 @@
+﻿@model  IEnumerable<MVSchool.Entities.StudentAssignment>
+@using PagedList;
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "AllStudentAssignments";
+}
+
+<h2>Show Assignments for each student's course</h2>
+@*------------------------------------------ Σελιδοποίηση -------------------------------------------------------------*@
+@{
+    SelectListItem a1 = new SelectListItem() { Text = "5", Value = "5" };
+    SelectListItem a2 = new SelectListItem() { Text = "10", Value = "10" };
+    SelectListItem a3 = new SelectListItem() { Text = "25", Value = "25" };
+    SelectListItem a4 = new SelectListItem() { Text = "50", Value = "50" };
+    List<SelectListItem> items = new List<SelectListItem>() { a1, a2, a3, a4 };
+}
+
+
+
+@*------------------------------------------------------------ΑΝΑΖΗΤΗΣΗ-----------------------------------------------------------------------*@
+
+
+<div class="form-inline">
+    @using (Html.BeginForm("AllStudentAssignments", "StudentAssignment", FormMethod.Get, new { @class = "form-inline" }))
+    {
+        string sort = ViewBag.SortOrder;
+        <fieldset>
+            @Html.TextBox("SearchName", null, new { @class = "form-control", placeholder = "Search name" })
+            @Html.TextBox("SearchCourseName", null, new { @class = "form-control", placeholder = "Search course" })
+            @Html.TextBox("SearchAssignment", null, new { @class = "form-control", placeholder = "Search assignment" })
+            @Html.TextBox("SearchMaxGrade", null, new { @class = "form-control", placeholder = "Search max grade", type = "number" })
+            @Html.TextBox("SearchMinGrade", null, new {  @class = "form-control", placeholder = "Search min grade", type = "number" })
+            @Html.TextBox("sortOrder", sort, new { type = "hidden" })
+            <button type="submit" class="btn btn-secondary">Search</button>
+        </fieldset>
+    }
+    </div>
+
+    @*------------------------------------------------------------ΦΙΛΤΡΑΡΙΣΜΑ-----------------------------------------------------------------------*@
+<div class="col-7">
+    <table class="table table-responsive table-secondary">
+        <tr>
+            <th>
+                @Html.ActionLink("Student", "AllStudentAssignments", "StudentAssignment", new { sortOrder = ViewBag.NameSort, searchName = ViewBag.SearchedName, searchCourse = ViewBag.SearchedCourse, searchAssignment = ViewBag.SearchedAssignment, searchMaxGrade = ViewBag.SearchedMaxGrade, searchMinGrade = ViewBag.SearchedMinGrad}, null)
+            </th>
+            <th>
+                @Html.ActionLink("Course", "AllStudentAssignments", "StudentAssignment", new { sortOrder = ViewBag.CourseSort, searchName = ViewBag.SearchedName, searchCourse = ViewBag.SearchedCourse, searchAssignment = ViewBag.SearchedAssignment, searchMaxGrade = ViewBag.SearchedMaxGrade, searchMinGrade = ViewBag.SearchedMinGrade }, null)
+            </th>
+            <th>
+                @Html.ActionLink("Assignment", "AllStudentAssignments", "StudentAssignment", new { sortOrder = ViewBag.AssignmentSort, searchName = ViewBag.SearchedName, searchCourse = ViewBag.SearchedCourse, searchAssignment = ViewBag.SearchedAssignment, searchMaxGrade = ViewBag.SearchedMaxGrade, searchMinGrade = ViewBag.SearchedMinGrade}, null)
+            </th>
+            <th>
+                @Html.ActionLink("Grade", "AllStudentAssignments", "StudentAssignment", new { sortOrder = ViewBag.GradeSort, searchName = ViewBag.SearchedName, searchCourse = ViewBag.SearchedCourse, searchAssignment = ViewBag.SearchedAssignment, searchMaxGrade = ViewBag.SearchedMaxGrade, searchMinGrade = ViewBag.SearchedMinGrade}, null)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Student.FirstName)  @Html.DisplayFor(modelItem => item.Student.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Assignment.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Grade)
+                </td>
+                @*<td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.TrainerId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.TrainerId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.TrainerId })
+                    </td>*@
+            </tr>
+        }
+
+    </table>
+   
+</div>

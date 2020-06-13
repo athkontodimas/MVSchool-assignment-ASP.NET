@@ -1,0 +1,45 @@
+﻿@model IEnumerable<MVSchool.Entities.Assignment>
+
+@{
+    ViewBag.Title = "Show Assignments";
+}
+
+<h2>Assignment List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubmissionDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var assignment in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => assignment.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => assignment.SubmissionDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => assignment.Description)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = assignment.AssignmentId }) |
+            @Html.ActionLink("Details", "Details", new { id=assignment.AssignmentId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=assignment.AssignmentId })
+        </td>
+    </tr>
+}
+
+</table>

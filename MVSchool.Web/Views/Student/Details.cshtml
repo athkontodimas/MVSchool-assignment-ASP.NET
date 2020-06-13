@@ -1,0 +1,29 @@
+﻿@model MVSchool.Entities.Student
+
+@{
+    ViewBag.Title = "Student Info";
+}
+
+<h2>Student Information </h2>
+
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.PhotoUrl)</th>
+        <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+        <th>@Html.DisplayNameFor(model => model.LastName)</th>
+        <th>@Html.DisplayNameFor(model => model.DateOfBirth)</th>
+    </tr>
+    <tr>
+        <td><img src="@Model.PhotoUrl" alt="@Model.FirstName @Model.LastName" width="200" </td>
+        <td>@Html.DisplayFor(model => model.FirstName)</td>
+        <td>@Html.DisplayFor(model => model.LastName)</td>
+        <td>@Html.DisplayFor(model => model.DateOfBirth)</td>
+    </tr>
+</table>
+
+<td>
+    @Html.ActionLink("Edit", "Edit",new { id = Model.StudentId }) |
+    @Html.ActionLink("Back to Students","ShowStudents","Student")
+</td>
+

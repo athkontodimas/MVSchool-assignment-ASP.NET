@@ -1,0 +1,38 @@
+﻿@model IEnumerable<MVSchool.Entities.Course>
+
+@{
+    ViewBag.Title = "AllCourses";
+}
+
+<h2>Available Courses</h2>
+
+
+<p>
+    @Html.ActionLink("Create New Course", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Title)</th>
+        <th>@Html.DisplayNameFor(model => model.StartDate)</th>
+        <th>@Html.DisplayNameFor(model => model.EndDate)</th>
+        <th></th>
+    </tr>
+
+    @foreach (var course in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => course.Title)</td>
+            <td>@Html.DisplayFor(modelItem => course.StartDate)</td>
+            <td>@Html.DisplayFor(modelItem => course.EndDate)</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = course.CourseId }) |
+                @Html.ActionLink("Details", "Details", "Course", new { id = course.CourseId }, null) |
+                @Html.ActionLink("Delete", "Delete", new { id = course.CourseId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+

@@ -1,0 +1,101 @@
+﻿@model PagedList.IPagedList<MVSchool.Entities.Trainer>
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "AllTrainers";
+}
+
+<h2>Our Trainers</h2>
+
+
+<p>
+    @Html.ActionLink("Add New Trainer", "Create")
+</p>
+
+@*------------------------------------------ Σελιδοποίηση -------------------------------------------------------------*@
+@{
+    SelectListItem a1 = new SelectListItem() { Text = "5", Value = "5" };
+    SelectListItem a2 = new SelectListItem() { Text = "10", Value = "10" };
+    SelectListItem a3 = new SelectListItem() { Text = "25", Value = "25" };
+    SelectListItem a4 = new SelectListItem() { Text = "50", Value = "50" };
+    List<SelectListItem> items = new List<SelectListItem>() { a1, a2, a3, a4 };
+}
+    @*------------------------------------------------------------ΑΝΑΖΗΤΗΣΗ-----------------------------------------------------------------------*@
+    <div class="form-inline">
+
+        @using (Html.BeginForm("ShowTrainers", "Trainer", FormMethod.Get, new { @class = "form-inline" }))
+        {
+            string sort = ViewBag.SortOrder;
+        <fieldset>
+            @Html.TextBox("SearchFirstName", null, new { placeholder = "Search first name" })
+            @Html.TextBox("SearchLastName", null, new { placeholder = "Search last name" })
+            @Html.TextBox("SearchSubject", null, new { placeholder = "Search subject" })
+            @Html.TextBox("sortOrder", sort, new { type = "hidden" })
+            @Html.DropDownList("pageSize", items, new { @class = "form-control" })
+            <input type="submit" class="btn btn-secondary" value="Search" />
+        </fieldset>
+        }
+
+        @*--------------------------------ΤΑΞΙΝΟΜΗΣΗ ΣΕ ΑΎΞΟΥΣΑ / ΦΘΙΝΟΥΣΑ ΣΕΙΡΑ------------------------------------*@
+        @*@using (Html.BeginForm("ShowTrainers", "Trainer", FormMethod.Get, new { @class = "form-inline" }))
+            {<fieldset>
+                    <button type="submit" class="btn btn-secondary">Sort By</button>
+                    <select class="form-control" id="exampleSelect1">
+                        <option>@Html.ActionLink("First Name", "ShowTrainers", "Trainer", new { sortOrder = ViewBag.FirstNameSort }, new { @class = "btn" })</option>
+                        <option>@Html.ActionLink("Last Name", "ShowTrainers", "Trainer", new { sortOrder = ViewBag.LastNameSort }, null)</option>
+                        <option>@Html.ActionLink("Subject", "ShowTrainers", "Trainer", new { sortOrder = ViewBag.SubjectSort }, null)</option>
+                    </select>
+                </fieldset>
+            }*@
+        @using (Html.BeginForm("ShowTrainers", "Trainer", FormMethod.Get, new { @class = "form-inline" }))
+        {
+            <div class="d-inline btn btn-secondary" , style="margin-left:30px">Sort By</div>
+            <fieldset>
+                @Html.ActionLink("First Name", "ShowTrainers", "Trainer", new { sortOrder = ViewBag.FirstNameSort }, new { @class = "btn btn-light" })
+                @Html.ActionLink("Last Name", "ShowTrainers", "Trainer", new { sortOrder = ViewBag.LastNameSort }, new { @class = "btn btn-light" })
+                @Html.ActionLink("Subject", "ShowTrainers", "Trainer", new { sortOrder = ViewBag.SubjectSort }, new { @class = "btn btn-light" })
+            </fieldset>
+        }
+
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("First Name", "ShowTrainers", "Trainer", new { sortOrder = ViewBag.FirstNameSort, searchFirstName = ViewBag.SearchedFirstName, searchLastName = ViewBag.SearchedLastName, searchSubject = ViewBag.SearchedSubject }, null)
+            </th>
+            <th>
+                @Html.ActionLink("Last Name", "ShowTrainers", "Trainer", new { sortOrder = ViewBag.LastNameSort, searchFirstName = ViewBag.SearchedFirstName, searchLastName = ViewBag.SearchedLastName, searchSubject = ViewBag.SearchedSubject }, null)
+            </th>
+            <th>
+                @Html.ActionLink("Subject", "ShowTrainers", "Trainer", new { sortOrder = ViewBag.SubjectSort, searchFirstName = ViewBag.SearchedFirstName, searchLastName = ViewBag.SearchedLastName, searchSubject = ViewBag.SearchedSubject }, null)
+
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Subject)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.TrainerId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.TrainerId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.TrainerId })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, x => @Url.Action("ShowTrainers", "Trainer", new { page = x, sortOrder = ViewBag.SortOrder, searchFirstName = ViewBag.SearchedFirstName, searchLastName = ViewBag.SearchedLastName, itemsPerPage = ViewBag.PageSize }))
+

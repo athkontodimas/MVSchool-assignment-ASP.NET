@@ -1,0 +1,40 @@
+﻿@model IEnumerable<MVSchool.Entities.Trainer>
+
+@{
+    ViewBag.Title = "Trainers per course";
+}
+
+<h2>Trainers teaching in every course</h2>
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+        <th>@Html.DisplayNameFor(model => model.LastName)</th>
+        <th>@Html.DisplayNameFor(model => model.Courses)</th>
+        
+
+        <th></th>
+    </tr>
+
+    @foreach (var trainer in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => trainer.FirstName)</td>
+            <td>@Html.DisplayFor(modelItem => trainer.LastName)</td>
+            <td>
+                <ol>
+                        @foreach (var course in trainer.Courses)
+                        {
+                            <li>@Html.DisplayFor(modelItem => course.Title)</li>
+                        }
+                </ol>
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = trainer.TrainerId })|
+                @Html.ActionLink("Details", "Details", "Course", new { id = trainer.TrainerId }, null) |
+                @Html.ActionLink("Delete", "Delete", new { id = trainer.TrainerId })
+            </td>
+        </tr>
+    }
+
+</table>

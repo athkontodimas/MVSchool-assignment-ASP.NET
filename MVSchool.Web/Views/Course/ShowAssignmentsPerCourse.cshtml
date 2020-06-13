@@ -1,0 +1,39 @@
+﻿@model IEnumerable<MVSchool.Entities.Course>
+
+@{
+    ViewBag.Title = "Assignments Per Course";
+}
+
+
+
+<h2>Every course contains the following assignments</h2>
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Title)</th>
+        <th>@Html.DisplayNameFor(model => model.Assignments)</th>
+    </tr>
+
+    @foreach (var course in Model)
+    {
+<tr>
+    <td>@Html.DisplayFor(modelItem => course.Title)</td>
+    <td>
+            @foreach (var assignment in course.Assignments)
+            {
+                <ul>
+                <li>
+                    @Html.DisplayFor(modelItem => assignment.Title)
+                   <div class="align-top font-weight-light">
+                    @Html.ActionLink("Edit", "Edit", new { id = course.CourseId }) |
+                    @Html.ActionLink("Details", "Details", "Course", new { id = course.CourseId }, null) |
+                    @Html.ActionLink("Delete", "Delete", new { id = course.CourseId })
+                    </div>
+                </li>
+            </ul>
+    }
+            </td>
+        </tr>
+    }
+
+</table>

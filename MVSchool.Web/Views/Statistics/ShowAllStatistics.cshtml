@@ -1,0 +1,100 @@
+﻿@model MVSchool.Web.Models.StatisticsViewModel
+
+
+
+@{
+    ViewBag.Title = "Show Our Statistics";
+}
+
+<h2>Useful Info about our school for current semester:</h2>
+<p>
+    Semester's syllabus includes:<ul>
+        <li>@Model.NoOfCourses courses, each of them having 3 assignments.</li>
+        <li>Total number of assignments: @Model.NoOfAssignments </li>
+        <li>@Model.NoOfTrainers experienced trainers teaching our @Model.NoOfStudents students in group-of-12 classes</li>
+        <li>Every course has one teacher. This is better for students, as we choose professionals who are specialized to each course's subject.</li>
+        <li>
+            As a result, each trainer teaches very few courses:
+
+            @*@RenderPage("_TrainersPerCourse.cshtml")*@
+            <div class=" alert-dark col-4">
+                <table class="table">
+                    <tr>
+                        <th class="text-center">Trainer Name</th>
+                        <th class="text-center">Number of Courses</th>
+                    </tr>
+                    @foreach (var trainer in Model.Trainers)
+                    {
+                        <tr>
+                            <td class="text-nowrap text-right">
+            <li>@Html.DisplayFor(modelItem => trainer.FirstName) @Html.DisplayFor(modelItem => trainer.LastName)</li></td>
+            <td class="text-center"> @trainer.Courses.Count()</td>
+            </tr>
+                    }
+                    </table></li>
+
+                    <li>
+                        Each course has a small number of students, for better learning experience:
+
+                        <div class=" alert-dark col-4 ">
+                            <table class="table">
+                                <tr>
+                                    <th class="text-center">Course Title</th>
+                                    <th class="text-center">Number of Students</th>
+                                </tr>
+                                @foreach (var course in Model.Courses)
+                                {
+                                    <tr>
+                                        <td class="text-nowrap text-center">
+                        <li>@Html.DisplayFor(modelItem => course.Title)</li></td>
+                        <td class="text-center">@course.Students.Count()</td>
+                        </tr>
+                                }
+                                </table></li>
+                                <li>
+                                    During each course there are assignments that students would work on and test their skills.
+
+                                    <div class=" alert-dark col-4 ">
+                                        <table class="table">
+                                            <tr>
+                                                <th class="text-center">Course Title</th>
+                                                <th class="text-center">Number of Assignments</th>
+                                            </tr>
+                                            @foreach (var course in Model.Courses)
+                                            {
+                                                <tr>
+                                                    <td class="text-nowrap text-center">
+                                    <li>@Html.DisplayFor(modelItem => course.Title)</li></td>
+                                    <td class="text-center">@course.Assignments.Count()</td>
+                                    </tr>
+                                            }
+                                      </table></li>
+                                      <li>Below you can see see some statistics about our students' success how efficient out teaching methodology is.
+                                      <p>Average grades per course</p>
+
+
+                                    <div class=" alert-dark col-4 ">
+                                        <table class="table">
+                                            <tr>
+                                                <th class="text-center">Course Title</th>
+                                                <th class="text-center">Average Grade</th>
+                                            </tr>
+                                            @foreach (var course in Model.Courses)
+                                            {
+                                                <tr>
+                                                    <td class="text-nowrap text-center"><li>@Html.DisplayFor(modelItem => course.Title)</li></td>
+
+                                                    @foreach (var course1 in Model.AvgGradePerCourse)
+                                                    {
+                                                        <td>@Html.DisplayFor(x => x.AvgGradePerCourse)</td>   //εμμφανιζει ολους τους μεσους ορους σε μια γραμμη..δεν καταφερα να το διορθωσω
+
+                                                    }
+                                                </tr>
+                                            }
+                                        </table></li>
+                                    </div>
+                                    </ul>
+
+
+
+

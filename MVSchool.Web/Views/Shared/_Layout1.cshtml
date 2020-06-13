@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - MVSchool</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">MVSchool </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="text-center" href="#">@Html.ActionLink("Home Page", "Index", "Home", new {style="margin-bottom:0px" })</a>
+                </li>
+                <li class="nav-item"></li>
+                @*DROPDOWN MENU TRAINERS*@
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Trainers</a>
+                    <div class="dropdown-menu" style="">
+                        <a class="dropdown-item" href="#">@Html.ActionLink("All Trainers", "ShowTrainers", "Trainer")</a>
+                        <a class="dropdown-item" href="#">@Html.ActionLink("Trainers per course", "ShowTrainersPerCourse", "Trainer")</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">@Html.ActionLink("Add Trainer", "Create", "TestTrainers")</a>
+                        <a class="dropdown-item" href="#">Edit Trainer</a>
+                        <a class="dropdown-item" href="#">Delete Trainer</a>
+                    </div>
+                </li>
+                @*------------------------------------------*@
+
+
+                <li class="nav-item">
+                    @*DROPDOWN MENU STUDENTS*@
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Students</a>
+                    <div class="dropdown-menu" style="">
+                        <a class="dropdown-item" href="#">@Html.ActionLink("All Students", "ShowStudents", "Student")</a>
+                        <a class="dropdown-item" href="#">@Html.ActionLink( "Enrolled students in courses", "ShowStudentsPerCourse", "Course")</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Add Student</a>
+                        <a class="dropdown-item" href="#">Edit Student</a>
+                        <a class="dropdown-item" href="#">Delete Student</a>
+                    </div>
+                </li>
+                @*------------------------------------------*@
+                @*DROPDOWN MENU ASSIGNMENTS*@
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Courses</a>
+                    <div class="dropdown-menu" style="">
+                        <a class="dropdown-item" href="#">@Html.ActionLink("All Courses", "ShowCourses", "Course")</a>
+                       
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">@Html.ActionLink("Add Course", "Create", "TestCourses")</a>
+                        <a class="dropdown-item" href="#">@Html.ActionLink("Edit Course", "Edit", "TestCourses")</a>
+                        <a class="dropdown-item" href="#">@Html.ActionLink("Delete Course", "Delete", "TestCourses")</a>
+                    </div>
+                </li>
+                @*---------------------------------------------------------*@
+                @*DROPDOWN MENU ASSIGNMENTS*@
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Assignments</a>
+                    <div class="dropdown-menu" style="">
+                        <a class="dropdown-item" href="#">@Html.ActionLink("All Assignments", "ShowAssignments", "Assignment")</a>
+                        <a class="dropdown-item" href="#">@Html.ActionLink("Assignments per course", "ShowAssignmentsPerCourse", "Course")</a>
+                        <a class="dropdown-item" href="#">@Html.ActionLink("Assignments per course for each student", "AllStudentAssignments", "StudentAssignment")</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">@Html.ActionLink("Add Assignment", "Create", "TestAssignments")</a>
+                        <a class="dropdown-item" href="#">@Html.ActionLink("Edit Assignment", "Edit", "TestAssignments")</a>
+                        <a class="dropdown-item" href="#">@Html.ActionLink("Delete Assignment", "Delete", "TestAssignments")</a>
+                    </div>
+                </li>
+                @*DROPDOWN MENU STATISTICS WITH LIST*@
+                @*<li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">General Info</a>
+            <div class="dropdown-menu" style="">
+                <a class="dropdown-item" href="#">@Html.ActionLink("Semester's summary", "ShowAllStatistics", "Statistics")</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">@Html.ActionLink("Add Assignment", "Create", "TestAssignments")</a>
+                <a class="dropdown-item" href="#">@Html.ActionLink("Edit Assignment", "Edit", "TestAssignments")</a>
+                <a class="dropdown-item" href="#">@Html.ActionLink("Delete Assignment", "Delete", "TestAssignments")</a>
+            </div>
+        </li>*@
+                @*---------------------------------------------------------*@
+                @*DROPDOWN MENU button STATISTICS*@
+                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                    <div class="btn-group" role="group">
+                        <button id="btnGroupDrop2" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Semester preview</button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop2">
+                            <a class="dropdown-item" href="#">@Html.ActionLink("General Info", "ShowAllStatistics", "Statistics")</a>
+                         </div>
+                    </div>
+                </div>
+                               </li>
+            </ul>
+
+        </div>
+    </nav>
+
+    @*DROPDOWNMENU*@
+
+
+
+
+
+
+
+       <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - MVSchool</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
